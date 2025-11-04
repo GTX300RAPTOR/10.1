@@ -1,14 +1,13 @@
 from typing import Any, Dict, List
+from datetime import datetime
 
 
 def filter_by_state(transactions: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
     """
     Фильтрует список банковских транзакций по заданному статусу.
-
     Args:
         transactions: Список словарей, представляющих банковские транзакции.
         state: Статус транзакции для фильтрации (по умолчанию 'EXECUTED').
-
     Returns:
         Новый список словарей, содержащий только транзакции с указанным статусом.
     """
@@ -21,19 +20,17 @@ def filter_by_state(transactions: List[Dict[str, Any]], state: str = 'EXECUTED')
 def sort_by_date(transactions: List[Dict[str, Any]], descending: bool = True) -> List[Dict[str, Any]]:
     """
     Сортирует список банковских транзакций по дате.
-
     Args:
         transactions: Список словарей, представляющих банковские транзакции.
         descending: Определяет порядок сортировки:
             - True (по умолчанию): по убыванию (сначала самые новые).
             - False: по возрастанию (сначала самые старые).
-
     Returns:
         Новый список словарей, отсортированный по дате.
     """
     sorted_transactions: List[Dict[str, Any]] = sorted(
         transactions,
-        key=lambda transaction: transaction['date'],
+        key=lambda transaction: datetime.fromisoformat(transaction['date']),
         reverse=descending
     )
     return sorted_transactions
@@ -69,3 +66,4 @@ if __name__ == '__main__':
     print("\nТранзакции, отсортированные по дате (возрастанию):")
     for transaction in sorted_transactions_asc:
         print(transaction)
+
