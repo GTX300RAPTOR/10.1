@@ -3,17 +3,15 @@ from datetime import datetime
 
 def get_date(date_string: str) -> str:
     """
-    Converts a date string from the format "YYYY-MM-DDTHH:MM:SS.ffffff"
-    to the format "DD.MM.YYYY".
+    Преобразует строку даты из формата "YYYY-MM-DDTHH:MM:SS.ffffff" в формат "DD.MM.YYYY".
 
-    Args:
-        date_string: A string representing the date in the format
-                     "YYYY-MM-DDTHH:MM:SS.ffffff".
+    Аргументы:
+        date_string: Строка, представляющая дату в формате "YYYY-MM-DDTHH:MM:SS.ffffff".
 
-    Returns:
-        A string representing the date in the format "DD.MM.YYYY".
+    Возвращает:
+        Строка, представляющая дату в формате "DD.MM.YYYY".
 
-    Examples:
+    Примеры:
         >>> get_date("2024-03-11T02:26:18.671407")
         '11.03.2024'
     """

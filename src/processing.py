@@ -4,14 +4,14 @@ from datetime import datetime
 
 def filter_by_state(transactions: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
     """
-    Filters a list of bank transactions by the given state.
+    Фильтрует список банковских транзакций по заданному статусу.
 
-    Args:
-        transactions: A list of dictionaries representing bank transactions.
-        state: The transaction state to filter by (default: 'EXECUTED').
+    Аргументы:
+        transactions: Список словарей, представляющих банковские транзакции.
+        state: Статус транзакции для фильтрации (по умолчанию: 'EXECUTED').
 
-    Returns:
-        A new list of dictionaries containing only transactions with the specified state.
+    Возвращает:
+        Новый список словарей, содержащий только транзакции с указанным статусом.
     """
     filtered_transactions: List[Dict[str, Any]] = [
         transaction for transaction in transactions if transaction.get('state') == state
@@ -21,16 +21,16 @@ def filter_by_state(transactions: List[Dict[str, Any]], state: str = 'EXECUTED')
 
 def sort_by_date(transactions: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
     """
-    Sorts a list of bank transactions by date.
+    Сортирует список банковских транзакций по дате.
 
-    Args:
-        transactions: A list of dictionaries representing bank transactions.
-        reverse: Determines the sorting order:
-            - True (default): descending (newest first).
-            - False: ascending (oldest first).
+    Аргументы:
+        transactions: Список словарей, представляющих банковские транзакции.
+        reverse: Определяет порядок сортировки:
+            - True (по умолчанию): по убыванию (самые новые в начале).
+            - False: по возрастанию (самые старые в начале).
 
-    Returns:
-        A new list of dictionaries sorted by date.
+    Возвращает:
+        Новый список словарей, отсортированный по дате.
     """
     sorted_transactions: List[Dict[str, Any]] = sorted(
         transactions,
