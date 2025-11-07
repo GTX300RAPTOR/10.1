@@ -4,10 +4,11 @@ def mask_account_card(account_info: str) -> str:
 
     Аргументы:
         account_info: Строка, содержащая тип карты и номер
-                      (например, "Visa Platinum 7000792289606361" или "Счет 73654108430135874305").
+                      (напр., "Visa Platinum 7000792289606361" или "Счет 73654108430135874305").
 
     Возвращает:
-        Строка с замаскированным номером карты или счета.
+        Строка с замаскированным номером карты или счета.  Возвращает исходную
+        строку, если формат ввода некорректен.
 
     Примеры:
         >>> mask_account_card("Visa Platinum 7000792289606361")
@@ -16,19 +17,20 @@ def mask_account_card(account_info: str) -> str:
         >>> mask_account_card("Счет 73654108430135874305")
         'Счет **4305'
     """
-    parts = account_info.split()
-    account_type = parts[0]
-    # Исправлено: если в строке только один элемент, account_number будет пустым
-    account_number = parts[1] if len(parts) > 1 else ""
+    try:
+        parts = account_info.split()
+        if len(parts) < 2:
+            return account_info  # Возвращаем оригинал, если некорректный формат
 
-    if account_type.lower() == "счет":
-        masked_number = "**" + account_number[-4:]
-    else:
-        masked_number = f"{account_number[:4]} {account_number[4:6]}** **** {account_number[12:]}"
+        account_type = parts[0].lower()
+        account_number = parts[1]
 
-    return f"{account_type} {masked_number}"
+        if account_type == "счет" or account_type == "счёт":
+            masked_number = "**" + account_number[-4:]  # Маскируем номер счета
+        else:
+            masked_number = f"{account_number[:4]} {account_number[4:6]}** **** {account_number[12:]}"
 
+        return f"{parts[0]} {masked_number}"
 
-if __name__ == "__main__":
-    print(mask_account_card("Visa Platinum 7000792289606361"))
-    print(mask_account_card("Счет 73654108430135874305"))
+    except (IndexError, ValueError):
+        return account_info  # Возвращаем оригинал при возникновении ошибки
